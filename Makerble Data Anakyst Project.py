@@ -1,82 +1,36 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # 1. Descriptive Statistics:
-
-# In[ ]:
-
 
 #import required library
 import pandas as pd
 import numpy as np
 
 
-# In[91]:
-
-
 #Load the dataset
 data = pd.read_csv(r"C:\Users\Sudhanshu\OneDrive\Desktop\employee_experience_survey_data.csv")
-
-
-# In[92]:
-
 
 #show data 
 data
 
-
-# In[93]:
-
-
 data.head() #for show only 5 rows of data set
-
-
-# In[95]:
-
 
 #Summary of data
 data.info()
 
-
-# In[96]:
-
-
 #Wheater checking data columns
 data.columns
 
-
-# In[97]:
-
-
 data.isna()
-
-
-# In[98]:
-
 
 #Identify Duplicate rows in a DataFrame or Series
 data.duplicated()
 
-
-# In[99]:
-
-
 #.sum() with duplicated() to Count the number of duplicate rows
 data.duplicated().sum()
-
-
-# In[100]:
-
 
 #Now we Counting Missing Values:
 data.isnull().sum()
 
 
 # # Descriptive Statstics Analysis
-
-# In[101]:
-
-
 # Claculate the 'overall engagement Engagement and job satisfication'
 desc_status = data[['Overall Engagement','Job Satisfaction']].describe()
 #Display the result
@@ -96,16 +50,9 @@ mapping = {
     'Strongly Agree': 5
 }
 
-
-# In[103]:
-
-
 # Applying the mapping to the columns
 data['Overall Engagement'] = data['Overall Engagement'].map(mapping)
 data['Job Satisfaction'] = data['Job Satisfaction'].map(mapping)
-
-
-# In[104]:
 
 
 #Now we Calculating the mean, median, and mode for the selected columns
@@ -120,23 +67,10 @@ print("Median:\n", median_values)
 print("\n")
 print("Mode:\n", mode_values)
 
-
-# In[ ]:
-
-
-
-
-
 # # ○ Identify any key trends in the survey results
-
-# In[115]:
-
 
 #import libraby for data visualization
 import matplotlib.pyplot as plt
-
-
-# In[145]:
 
 
 # Step 2: Convert survey responses to numeric values
@@ -155,20 +89,12 @@ department_satisfaction = data.groupby('Department')[columns_convert].mean()
 # Step 5: Calculate average satisfaction scores for each gender
 gender_satisfaction = data.groupby('Gender')[columns_convert].mean()
 
-
-# In[146]:
-
-
 # Step 6: Plot satisfaction trends by Age Bracket
 plt.figure(figsize=(10, 5))
 age_satisfaction.plot(kind='bar', title='Average_Satisfaction by Age Bracket', ax=plt.gca())
 plt.ylabel('Average Score')
 plt.xticks(rotation=45)
 plt.show()
-
-
-# In[147]:
-
 
 # Step 7: Plot satisfaction trends by Department
 plt.figure(figsize=(10, 5))
@@ -177,9 +103,6 @@ plt.ylabel('Average Score')
 plt.xticks(rotation=40)
 plt.tight_layout()
 plt.show()
-
-
-# In[148]:
 
 
 # Step 8: Plot satisfaction trends by Gender
@@ -191,23 +114,10 @@ plt.tight_layout()
 plt.show()
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
 
 # # 2. Inferential Statistics:
-
-# In[111]:
-
-
 import scipy.stats as stats
 # Sample DataFrame (replace with your actual DataFrame)
 data = pd.DataFrame({
@@ -232,10 +142,6 @@ if p_value < alpha:
 else:
     print("Fail to reject the null hypothesis: There is no significant difference in Job Satisfaction between IT and HR.")
 
-
-# In[112]:
-
-
 # Sample DataFrame (replace with your actual DataFrame)
 data = pd.DataFrame({
     'Work-Life Balance': [4, 5, 3, 2, 4, 3, 5, 2],
@@ -256,16 +162,6 @@ elif correlation < 0:
 else:
     print("There is no correlation between Work-Life Balance and Overall Engagement.")
 
-
-# In[ ]:
-
-
-
-
-
-# In[152]:
-
-
 #Perform correlation analysis
 #.corr() function calculates the Pearson correlation coefficient between the two specified columns.
 #+1 indicates a perfect positive correlation.
@@ -276,10 +172,3 @@ correlation_coefficient = data['Work-Life Balance'].corr(data['Overall Engagemen
 
 #Display the correlation coefficient
 print(f"Correlation between Work-Life Balance and Overall Engagement: {correlation_coefficient:.2f}")
-
-
-# In[ ]:
-
-
-
-
